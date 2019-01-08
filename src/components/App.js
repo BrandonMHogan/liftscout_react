@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { addPlace } from "../actions";
 import ListItem from "./ListItem";
 
-type Props = {};
-class App extends Component<Props> {
+class App extends Component {
   state = {
     placeName: "",
     places: []
