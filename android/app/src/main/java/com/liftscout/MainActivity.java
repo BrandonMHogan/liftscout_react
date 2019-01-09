@@ -1,8 +1,20 @@
 package com.liftscout;
 
-import com.facebook.react.ReactActivity;
+import android.os.Bundle;
+import com.facebook.react.ReactFragmentActivity;
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
-public class MainActivity extends ReactActivity {
+public class MainActivity extends ReactFragmentActivity {
+
+    /**
+     * Added as part of linking react-native-screens
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -11,5 +23,22 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "liftscout";
+    }
+
+
+    /**
+     * From react-navigation and react-native-gesture-handler setup,
+     * opens up a react activity delegate
+     */
+    @Override
+    protected ReactActivityDelegate createReactActivityDelegate() {
+
+        return new ReactActivityDelegate(this, getMainComponentName()) {
+
+            @Override
+            protected ReactRootView createRootView() {
+                return new RNGestureHandlerEnabledRootView(MainActivity.this);
+            }
+        };
     }
 }

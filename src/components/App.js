@@ -3,6 +3,12 @@ import { StyleSheet, TextInput, View, Button, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { addPlace } from "../actions";
 import ListItem from "./ListItem";
+import { useScreens } from "react-native-screens";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+
+// this makes react-navigation use react-native-screens.
+// must be called before any rendering for setup.
+useScreens();
 
 class App extends Component {
   state = {
