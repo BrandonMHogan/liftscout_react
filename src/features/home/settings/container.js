@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { connect } from "react-redux";
 import { backgroundColor } from "app/styles/constants";
 
-class Settings extends React.Component {
+class AppSettings extends React.Component {
   // Navigation options for the specific component
   static navigationOptions = props => {
     const { params } = props.navigation.state;
@@ -14,7 +14,6 @@ class Settings extends React.Component {
   };
 
   render() {
-    console.log("Displaying the Settings");
     return (
       <View style={styles.container}>
         <Button
@@ -52,4 +51,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Settings);
+)(AppSettings);

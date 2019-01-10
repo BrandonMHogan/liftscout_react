@@ -32,7 +32,8 @@ class Dashboard extends React.Component {
   }
 
   _onSettingsClicked = () => {
-    alert("It worked");
+    //alert("It worked");
+    this.props.navigation.push("AppSettings");
   };
 
   render() {

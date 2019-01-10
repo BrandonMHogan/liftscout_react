@@ -1,12 +1,18 @@
-import Dashboard from "app/features/dashboard/container";
-import Settings from "app/features/settings/container";
+import React from "react";
+import Dashboard from "app/features/home/dashboard/container";
+import AppSettings from "app/features/home/settings/container";
 import ExerciseList from "app/features/exercises/list/container";
 import ExerciseCreate from "app/features/exercises/create/container";
 import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import { mainColor, actionBarTextColor } from "app/styles/constants";
+import {
+  mainColor,
+  thirdColor,
+  actionBarTextColor
+} from "app/styles/constants";
+import Icons from "react-native-vector-icons/FontAwesome5";
 
 const navigationOptions = {
   headerStyle: {
@@ -21,7 +27,8 @@ const navigationOptions = {
 
 const DashboardStack = createStackNavigator(
   {
-    Dashboard: Dashboard
+    Dashboard: Dashboard,
+    AppSettings: AppSettings
   },
   {
     initialRouteName: "Dashboard",
@@ -46,21 +53,34 @@ const ExerciseStack = createStackNavigator(
   }
 );
 
-const SettingsStack = createStackNavigator(
+/**
+ * Setup for the bottom tab navigation.
+ */
+export default createBottomTabNavigator(
   {
-    Settings: Settings
+    Dashboard: DashboardStack,
+    Exercises: ExerciseStack
   },
   {
-    initialRouteName: "Settings",
-    defaultNavigationOptions: navigationOptions,
-    navigationOptions: {
-      tabBarLabel: "Settings"
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Icons;
+        let iconName;
+
+        if (routeName === "Dashboard") {
+          iconName = `home`;
+        } else if (routeName === "Exercises") {
+          iconName = `dumbbell`;
+        }
+
+        // You can return any component that you like here!
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: thirdColor,
+      inactiveTintColor: "gray"
     }
   }
 );
-
-export default createBottomTabNavigator({
-  Dashboard: DashboardStack,
-  Exercises: ExerciseStack,
-  Settings: SettingsStack
-});
